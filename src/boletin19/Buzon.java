@@ -36,38 +36,50 @@ public class Buzon {
 
     public int numCorreos() {
         int tam = cor.size();
+        System.out.println(tam);
         return tam;
     }
 
     public void add() {
-        JOptionPane.showInputDialog(null, "Contido: ");
-        cor.add(new Correo());
+        String c=JOptionPane.showInputDialog(null, "Contido: ");
+        cor.add(new Correo(c,false));
     }
 
     public void porLeer() {
+        int aux=0;
         for (Correo ex : cor) {
-            boolean n = ex.getLeido();
+
             if (ex.getLeido() == false) {
-                System.out.println("Non quedan por leer");
-            } else {
-                System.out.println("Quedan por ler");
+                aux+=1;
             }
         }
+        System.out.println("Quedan "+ aux+" correos por leer");
     }
 
     public String primerNoLeido() {
-        String c = "Todos leidos";
+        String c = "";
+        int aux=0;
         for (Correo ex : cor) {
             if (ex.getLeido() == false) {
                 c = ex.getContenido();
+                System.out.println(c);
+                ex.setLeido(true);
+                aux=1;
+                break;
+            }else{
+                aux=0;
             }
+            
         }
+        if (aux==0)
+                System.out.println("Todos leidos");
         return c;
     }
 
     public String mostrar() {
         int p = Integer.parseInt(JOptionPane.showInputDialog("Posicion: "));
         String m = cor.get(p).getContenido();
+        System.out.println(m);
         return m;
     }
 
